@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 ### This is a test script made by VZlatkov (a.k.a Xerxes) that uses A.Alexiev's Terraform configs that would automate the deployment of AWS resources without the need to write any code but instead just input the variables that one would need for the deployment.
 ### v1.0.1
 ### I have no idea what the fuck I am going to do in this revision appart from pasting the JSON code and substituting the objects' values with variables.
@@ -27,6 +28,9 @@ cr=${cr%.}
 
 #echo the ">> insert here:"
 st=`echo '>> insert here: '`
+
+
+
 
 
 #This Checks for the OS's package manager 
@@ -73,6 +77,10 @@ then		snap install --edge terraform
 else $i install -y terraform
 
 fi
+
+
+
+
 
 
 echo '                  THIS SCRIPT IS A SCRIPT FOR AUTOMATED DEPLOYMENT OF AWS RESOURCES USING TERRAFORM'
@@ -129,7 +137,15 @@ EOF
 echo 'done'
 fi
 
+
+
+
+
+
 ###########This is the Networking Part ##########################
+
+
+
 
 echo $cr
 echo '############################################################################################################################'
@@ -143,6 +159,8 @@ echo $cr
 read -p "       PLEASE INSERT Gateway $cr $st" gw
 echo $st
 echo $cr
+
+
 
 
 #Break if mandatory arguments are not present
@@ -221,7 +239,15 @@ EOF
 )
 
 fi
+
+
+
+
+
 ###########This is the SG Part ##########################
+
+
+
 
 echo $cr
 echo '############################################################################################################################'
@@ -231,25 +257,18 @@ echo '##########################################################################
 echo $cr
 echo $cr
 read -p "INSERT THE DESIRED NAME FOR THE LOAD BALANCER'S SG $cr $st" elb_sg
-echo $st
 echo $cr
 read -p "INSERT THE DESIRED NAME FOR THE INSTANCES' SG $cr $st" asg_sg
-echo $st
 echo $cr
 read -p "INSERT INBOUND START PORT FOR THE ELB $cr $st" elb_fp
-echo $st
 echo $cr
 read -p "INSERT INBOUND END PORT FOR THE ELB $cr $st" elb_tp
-echo $st
 echo $cr
 read -p "INSERT THE DESIRED PROTOCOL $cr $st" protocol
-echo $st
 echo $cr
 read -p "INSERT OUTBOUND START PORT FOR THE ELB $cr $st" elb_fp_out
-echo $st
 echo $cr
 read -p "INSERT OUTBOUND END PORT FOR THE ELB $cr $st" elb_tp_out
-echo $st
 echo $cr
 
 (
@@ -322,6 +341,11 @@ resource "aws_security_group" "$asg_sg" {
 }
 EOF
 )
+
+
+
+
+
 
 
     ################################################################## ASG CONFIG STARTS FROM HERE #######################################################################
@@ -428,14 +452,23 @@ resource "aws_s3_bucket_object" "test_indexfile" {
 EOF
 )
 
+
+
+
+
+
+
 ################################################ELB CONF STARTS HERE #############################################################
-################################################ELB CONF STARTS HERE ##############################################################
+
 
 
 
 ### Create Application Load Balancer
 ### create listener(s)
 ### attach target group to ASG
+
+
+
 
 echo $cr
 echo '############################################################################################################################'
@@ -489,4 +522,3 @@ resource "aws_lb_listener" "alb_listener" {
 }
 GG
 )
-
